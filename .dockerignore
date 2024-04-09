@@ -1,0 +1,7 @@
+/node_modules
+nmp-debug.log
+.git
+.editorconfig
+.gitignore
+/e2e
+*.md
