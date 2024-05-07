@@ -1,19 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+//import { SidebarmenuComponent } from '../../shared/sidebarmenu/sidebarmenu.component';
 
 @Component({
   selector: 'app-principal',
   standalone: true,
-  imports: [],
+  imports: [NavbarComponent],
   templateUrl: './principal.component.html',
-  styleUrl: './principal.component.css'
+  styleUrl: './principal.component.css',
 })
 
-export class PrincipalComponent implements OnInit {
-
-  constructor () {}
-
-  ngOnInit(): void {
-    
-  }
-
-}
+export default class PrincipalComponent {}

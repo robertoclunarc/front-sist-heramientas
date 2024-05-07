@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
-import { cilLockLocked } from '@coreui/icons';
+import { Router } from '@angular/router';
+
 import { IconDirective, IconSetService } from '@coreui/icons-angular';
 
 @Component({
@@ -12,10 +13,25 @@ import { IconDirective, IconSetService } from '@coreui/icons-angular';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {}
+  username: string = '';
+  passw: string = '';
+
+  constructor(
+    private router: Router,
+    private toastr: toastrService ) {}
 
   ngOnInit(): void {
     
+  }
+
+  login() {
+
+    if (this.username == '' || this.passw == '') {
+      this.toastr.error('Todos los campos son obligatorios', 'Error');
+      return
+    }
+
+    this.router.navigate(['/principal'])
   }
 
 }
