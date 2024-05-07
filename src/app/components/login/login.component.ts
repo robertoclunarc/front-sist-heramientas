@@ -13,23 +13,16 @@ import { IconDirective, IconSetService } from '@coreui/icons-angular';
 })
 export class LoginComponent implements OnInit {
 
-  username: string = '';
-  passw: string = '';
+  username!: string;
+  passw!: string
 
-  constructor(
-    private router: Router,
-    private toastr: toastrService ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     
   }
 
   login() {
-
-    if (this.username == '' || this.passw == '') {
-      this.toastr.error('Todos los campos son obligatorios', 'Error');
-      return
-    }
 
     this.router.navigate(['/principal'])
   }

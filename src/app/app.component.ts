@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import PrincipalComponent from './components/principal/principal.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-root',
@@ -11,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     RouterOutlet,
     LoginComponent,
-    ReactiveFormsModule
+    RouterModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
