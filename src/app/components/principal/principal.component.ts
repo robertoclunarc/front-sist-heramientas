@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
-//import { SidebarmenuComponent } from '../../shared/sidebarmenu/sidebarmenu.component';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-principal',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [
+    RouterModule,
+    CommonModule,
+    NavbarComponent,
+  ],
   templateUrl: './principal.component.html',
   styleUrl: './principal.component.css',
 })

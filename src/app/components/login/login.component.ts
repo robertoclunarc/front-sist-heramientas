@@ -1,12 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { IconDirective, IconSetService } from '@coreui/icons-angular';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [IconDirective],
+  imports: [
+    CommonModule,
+    RouterModule,
+    IconDirective
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

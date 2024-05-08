@@ -13,30 +13,39 @@ export const routes: Routes = [
 
     {path: 'principal', component: PrincipalComponent,
     children: [
+
+    {path: 'home',
+    title: 'Home',
+    loadComponent: () => import('./components/principal/home/home.component'),
+    },
         
     {path: 'consultas',
     title: 'Consultas',
     loadComponent: () => import('./components/principal/consultas/consultas.component')},
 
-    {path: 'herramientas',
-    title: 'Herramientas',
-    loadComponent: () => import('./components/principal/herramientas/herramientas.component')},
-
-    {path: 'entradas',
-    title: 'Entradas',
-    loadComponent: () => import('./components/principal/entradas/entradas.component')},
-
-    {path: 'solicitante',
-    title: 'Solicitante',
-    loadComponent: () => import('./components/principal/solicitantes/solicitantes.component')},
+    {path: 'devoluciones',
+    title: 'Devoluciones',
+    loadComponent: () => import('./components/principal/devoluciones/devoluciones.component')},
 
     {path: 'prestamos',
     title: 'Prestamos',
     loadComponent: () => import('./components/principal/prestamos/prestamos.component')},
 
-    {path: 'devoluciones',
-    title: 'Devoluciones',
-    loadComponent: () => import('./components/principal/devoluciones/devoluciones.component')}
+    {path: 'entradas',
+    title: 'Entradas',
+    loadComponent: () => import('./components/principal/entradas/entradas.component')},
+
+    {path: 'solicitantes',
+    title: 'Solicitantes',
+    loadComponent: () => import('./components/principal/solicitantes/solicitantes.component')},
+
+    {path: 'herramientas',
+    title: 'Herramientas',
+    loadComponent: () => import('./components/principal/herramientas/herramientas.component')},
+
+    {
+        path: '', redirectTo: 'home', pathMatch: 'full'        
+    }
 
     ]}
 ];
