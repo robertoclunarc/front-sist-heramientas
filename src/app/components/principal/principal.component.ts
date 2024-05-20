@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './principal.component.html',
   styleUrl: './principal.component.css'
 })
-export class PrincipalComponent {
+export class PrincipalComponent implements OnInit {
 
+  constructor(){
+    console.log('inicializando')
+  }
 
+  ngOnInit(): void {
+    console.log('onInit')
+  }
 }
