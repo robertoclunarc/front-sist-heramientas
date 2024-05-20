@@ -11,7 +11,7 @@ import { UsuariosService } from '../../core/services/login/usuarios.service';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
+    RouterModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   username: string = '';
   passw: string = '';
-
+  currentUser: Usuario = {};
   constructor(
     private router: Router,
     private _usuariosService: UsuariosService,
@@ -33,66 +33,32 @@ export class LoginComponent implements OnInit {
     
   }
 
-  /*login() {
-
-    try {
-      if(this.username == '' || this.passw == '') {
-        alert('Todos los campos son requeridos')
-        return;
-      }
-  
-      const usuario= {
-        user: this.username,
-        passw: this.passw
-      }
-  
-      
-      this._usuariosService.login(usuario).subscribe({
-      next: (data) => {
-        const token = data; //this.router.navigate(['/principal'])
-        localStorage.setItem('jwt_token', token);
-        console.log(data);
-        //this.router.navigate(['sistherramientas/principal']);
-        
-      }
-     })
-    } catch (error) {
-      console.error(error)
-    }
-
-    
-
-    //this.router.navigate(['/principal'])
-  }*/
-
   async login() {
-
     try {
-      if(this.username == '' || this.passw == '') {
-        alert('Todos los campos son requeridos')
+      if (this.username === '' || this.passw === '') {
+        alert('Todos los campos son requeridos');
         return;
       }
-  
-      const usuario= {
+
+      const usuario = {
         user: this.username,
         passw: this.passw
-      }
-  
+      };
+
+      const response = await this._usuariosService.login(usuario).toPromise();
       
-     /* await this._usuariosService.login(usuario)
-      .toPromise()
-      .then(result => {
-        console.log(result);
-      })*/
-      console.log(usuario);
-     
+      if (response.status == 'OK') {
+        console.log(response.usuario);
+        this.currentUser = response.usuario;
+        
+        this.router.navigate(['sistherramientas/principal'])
+      } else {
+        alert(response.msj);
+      }
+
     } catch (error) {
-      console.error(error)
+      console.error('Hubo un error durante el login:', error);
+      alert('Hubo un problema durante el login. Por favor, intenta nuevamente más tarde.');
     }
-
-    
-
-    //this.router.navigate(['/principal'])
   }
-
 }
