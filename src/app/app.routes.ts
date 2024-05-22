@@ -1,24 +1,25 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { PrincipalComponent } from './components/principal/principal.component';
+import { environment } from '../environments/environment.development';
 
 export const routes: Routes = [
     {
         path: '',
-        component: LoginComponent,
+        redirectTo: `${environment.urlDomain}/login`,
         pathMatch: 'full'
     },
     {
-        path: 'sistherramientas/login', 
+        path: `${environment.urlDomain}`,
+        redirectTo: `${environment.urlDomain}/login`,
+        pathMatch: 'full'
+    },
+    {
+        path: `${environment.urlDomain}/login`,
         component: LoginComponent
     },
     {
-        path: 'sistherramientas', 
-        component: LoginComponent,
-    },
-
-    {
-        path: 'sistherramientas/principal', 
+        path: `${environment.urlDomain}/principal`, 
         component: PrincipalComponent,
         children:[
 

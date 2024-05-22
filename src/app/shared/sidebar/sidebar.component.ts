@@ -12,5 +12,15 @@ import { RouterModule } from '@angular/router';
 })
 export class SidebarComponent {
 
-  
+  public menuItems : any;
+
+  ngOnInit(): void {
+    /*
+    this.menuItems = routes
+   .map((route) => route.children ??[])
+    .flat()
+    .filter((route) => route && route.path )
+    .filter((route) => !route.path?.includes(':'));
+    console.log(this.menuItems)*/
+  }
 }
