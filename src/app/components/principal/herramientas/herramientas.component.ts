@@ -10,9 +10,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export default class HerramientasComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, public formHerramientas:FormGroup) {
-
-  }
+  constructor(private fb: FormBuilder, public formHerramientas:FormGroup) { }
 
   ngOnInit(): void {
 
