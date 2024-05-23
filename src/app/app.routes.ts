@@ -31,7 +31,7 @@ export const routes: Routes = [
             {
                 path: 'consultas',
                 title: 'Consultas',
-                loadComponent: () => import('./components/principal/consultas/consultas.component')
+                loadComponent: () => import('./components/principal/consultas/consultas.component'),
             },
             {
                 path: 'devoluciones',
@@ -58,6 +58,11 @@ export const routes: Routes = [
                 title: 'Herramientas',
                 loadComponent: () => import('./components/principal/herramientas/herramientas.component')
             },
+            {
+                path: '',
+                redirectTo: 'herramientas',
+                pathMatch: 'full'
+            }
 
         ]
   }, 
