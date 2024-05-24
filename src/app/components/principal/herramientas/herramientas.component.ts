@@ -18,6 +18,9 @@ export default class HerramientasComponent implements OnInit {
     private fb: FormBuilder, private _herramientasService: HerramientasService) { }
 
   ngOnInit(): void {
+
+    this.listaHerramientas();
+    
     this.formHerramientas = this.fb.group({
       idherramienta: [''],
       fecha: ['', Validators.required],
@@ -30,11 +33,15 @@ export default class HerramientasComponent implements OnInit {
       descripcion: ['', Validators.required],
       observaciones: ['', Validators.required]
     });
+
+    console.log(this.listaHerramientas)
   }
 
-  nuevaHerramienta() {
-    console.log(this.formHerramientas);
-    this.mostrarBotones = true
+  listaHerramientas() {
+
+    this._herramientasService.listaHerramienta().subscribe((data) => {
+      console.log(data)
+    })
   }
 
   agregarHerramienta() {
@@ -48,22 +55,25 @@ export default class HerramientasComponent implements OnInit {
       ubicacion: this.formHerramientas.value.ubicacion,
       preciopedido: this.formHerramientas.value.precioPedido
 
-    }
+    };
 
     this._herramientasService.agregarHerramienta(herramientas).subscribe(() => {
       console.log('Herramienta Agregada');
-      
     })
-    console.log('agregarHerramienta');
-    
 
+    this.limpiar();
   }
 
   modificarHerramienta() {
     console.log('modificarHerramienta');
   }
 
-  eliminarHerramienta() {
-    console.log('eliminarHerramienta');
+  limpiar() {
+    this.formHerramientas.reset();
+  }
+
+  cancelar() {
+    console.log('cancelar');
+
   }
 }

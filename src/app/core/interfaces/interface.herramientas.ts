@@ -4,12 +4,12 @@ export interface Herramientas {
     codigoant?: string;
     nombre?: string;
     descripcion?: string;
-    fecha?: Date;
+    fecha?: string;
     stock?: number;
     marca?: string;
     observaciones?: string;
-    idcategoria?: number;
-    categoriaant?:string;
+   // idcategoria?: number;
+    //categoriaant?:string;
     ubicacion?: number;
     observacioni?: string;
     cantidadminima?: number;
@@ -22,8 +22,8 @@ export interface Herramientas {
     cap?: string;
     precioestandar?: number;
     usuarioreg?: string;
-    fechareg?: Date;
+    fechareg?: string;
     usuariomod?: string;
-    fechamod?: Date
+    fechamod?: String
 
 }

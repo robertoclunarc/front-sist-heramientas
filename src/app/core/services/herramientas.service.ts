@@ -13,8 +13,12 @@ export class HerramientasService {
 
   constructor(private http: HttpClient) { }
 
+  listaHerramienta(): Observable<Herramientas[]> {
+    return this.http.get<Herramientas[]>(`${this.api_uri}/herramienta/all`);
+  }
+
   agregarHerramienta(herramientas: Herramientas): Observable<void> {
 
-    return this.http.post<void>(`${this.api_uri}/herramienta/`, herramientas);
+    return this.http.post<void>(`${this.api_uri}/herramienta/insertar`, herramientas);
   }
 }
