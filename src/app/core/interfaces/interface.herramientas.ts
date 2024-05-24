@@ -2,9 +2,11 @@ export interface Herramientas {
 
     idherramienta?: number;
     codigoant?: string;
+    nombre?: string;
     descripcion?: string;
     fecha?: Date;
     stock?: number;
+    marca?: string;
     observaciones?: string;
     idcategoria?: number;
     categoriaant?:string;

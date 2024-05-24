@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Usuario } from '../../core/interfaces/interface.login';
-import { UsuariosService } from '../../core/services/login/usuarios.service';
+import { UsuariosService } from '../../core/services/usuarios.service';
 
 @Component({
   selector: 'app-login',

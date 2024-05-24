@@ -1,75 +1,99 @@
-<h5>herramientas works!</h5>
+<form [formGroup]="formHerramientas" class="row g-3">
 
-<form [formGroup]="formHerramientas" (ngSubmit)="nuevaHerramienta" class="row g-3">
-    <div class="d-flex justify-content-center mb-3">
-
-      <div class="col-md-1">
-        <button type="submit" class="btn btn-primary">Nuevo</button>
-      </div>
-      <div class="col-md-1">
-        <button type="submit" class="btn btn-success">Guardar</button>
-      </div>
-      <div class="col-md-5">
-        <button type="submit" class="btn btn-warning">Cancelar</button>
-      </div>
-      <div class="col-md-1">
-        <button type="submit" class="btn btn-info">Modificar</button>
-      </div>
-      <div class="col-md-1">
-        <button type="submit" class="btn btn-primary">Imprimir</button>
-      </div>
-      <div class="col-md-1">
-        <button type="submit" class="btn btn-secondary">Eliminar</button>
-      </div>
-
+  <div class="card">
+    <div class="card-header">
+      
+    <div class="d-flex justify-content-center">
+      <h5>HERRAMIENTAS</h5>
     </div>
 
-    <div class="d-flex mb-3">
-      <div class="col-md-1 p-2">
-        <label for="inputCodigo" class="form-label">ID</label>
-        <input formControlName="idherramienta" type="text" class="form-control" id="inputCodigo" placeholder="H000001">
-      </div>
-      <div class="col-md-2 p-2">
-        <label for="inputFecha" class="form-label">Fecha</label>
-        <input formControlName="fecha" type="date" class="form-control" id="inputFecha">
-      </div>
-      <div class="col-md-4 p-2">
-        <label for="inputNombre" class="form-label">Nombre</label>
-        <input formControlName="nombre" type="text" class="form-control" id="inputNombre" placeholder="ADAPTADOR P/RATCHET DE 1/2A 3/8">
-      </div>
-      <div class="col-md-4 ms-auto p-2">
-        <label for="inputBusqueda" class="form-label">Busqueda de Herramientas</label>
-        <select id="inputBusqueda" class="form-select">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
+      <div class="d-flex justify-content-sm-center">
 
+        <div class="col-ms-2 p-2">
+          <button type="button" class="btn btn-primary" (click)="nuevaHerramienta()">Nuevo</button>
+        </div>
+        <div class="col-ms-2 p-2">
+          <button type="button" class="btn btn-success" [disabled]="!mostrarBotones" (click)="agregarHerramienta()">Agregar</button>
+        </div>
+        <div class="col-ms-2 p-2">
+          <button type="button" class="btn btn-warning" [disabled]="!mostrarBotones">Cancelar</button>
+        </div>
+        <div class="col-ms-2 p-2">
+          <button type="button" class="btn btn-info" (click)="modificarHerramienta()">Modificar</button>
+        </div>
+        <div class="col-ms-2 p-2">
+          <button type="button" class="btn btn-primary">Imprimir</button>
+        </div>
+        <div class="col-ms-2 p-2">
+          <button type="button" class="btn btn-secondary" (click)="eliminarHerramienta()">Eliminar</button>
+        </div>
+
+      </div>
+  
     </div>
 
-    <div class="d-flex justify-content-evenly mb-3">
-
-      <div class="col-md-3">
-        <label for="inputMarca" class="form-label">Marca</label>
-        <input formControlName="marca" type="text" class="form-control" id="inputMarca" placeholder="STANLEY">
+    <div class="card-body">
+  
+      <div class="d-flex mb-3">
+        <div class="col-md-1 p-2">
+          <label for="inputCodigo" class="form-label">ID</label>
+          <input formControlName="idherramienta" type="text" class="form-control" id="inputCodigo" placeholder="H000001">
+        </div>
+        <div class="col-md-2 p-2">
+          <label for="inputFecha" class="form-label">Fecha</label>
+          <input formControlName="fecha" type="date" class="form-control" id="inputFecha">
+        </div>
+        <div class="col-md-4 p-2">
+          <label for="inputNombre" class="form-label">Nombre</label>
+          <input formControlName="nombre" type="text" class="form-control" id="inputNombre" placeholder="ADAPTADOR P/RATCHET DE 1/2A 3/8">
+        </div>
+        <div class="col-md-4 ms-auto p-2">
+          <label for="inputBusqueda" class="form-label">Busqueda de Herramientas</label>
+          <select id="inputBusqueda" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
       </div>
-      <div class="col-md-3">
-        <label for="inputStock" class="form-label">Stock</label>
-        <input formControlName="stock" type="number" class="form-control" id="inputStock" placeholder="1">
-      </div>
-      <div class="col-md-3">
-        <label for="inputEstatus" class="form-label">Estatus Producto</label>
-        <input formControlName="status" type="number" class="form-control" id="inputEstatus" placeholder="1">
-      </div>
+  
+      <div class="d-flex justify-content-evenly mb-3">
+        <div class="ms-auto p-2">
+          <label for="inputMarca" class="form-label">Marca</label>
+          <input formControlName="marca" type="text" class="form-control" id="inputMarca" placeholder="STANLEY">
+        </div>
+        <div class="ms-auto p-2">
+          <label for="inputStock" class="form-label">Stock</label>
+          <input formControlName="stock" type="number" class="form-control" id="inputStock" placeholder="0">
+        </div>
+        <div class="ms-auto p-2">
+          <label for="inputEstatus" class="form-label">Estatus Producto</label>
+          <input formControlName="status" type="number" class="form-control" id="inputEstatus" placeholder="0">
+        </div>
 
-    </div >
+        <div class="ms-auto p-2">
+          <label for="inputEstatus" class="form-label">Ubicación</label>
+          <input formControlName="ubicacion" type="text" class="form-control" id="inputEstatus" placeholder="H 00001">
+        </div>
 
-    <div class="mb-3">
+        <div class="ms-auto p-2">
+          <label for="inputEstatus" class="form-label">Precio Pedido</label>
+          <input formControlName="precioPedido" type="number" class="form-control" id="inputEstatus" placeholder="0">
+        </div>
+
+      </div>
+  
+      <div class="mb-3">
         <label for="exampleDescripcion" class="form-label">Descripción</label>
         <textarea formControlName="descripcion" class="form-control" id="exampleDescripcion" rows="3"></textarea>
       </div>
       <div class="mb-3">
-        <label for="exampleDescripcion" class="form-label">Oservaciones</label>
-        <textarea formControlName="observaciones" class="form-control" id="exampleDescripcion" rows="3"></textarea>
+        <label for="exampleObservaciones" class="form-label">Observaciones</label>
+        <textarea formControlName="observaciones" class="form-control" id="exampleObservaciones" rows="3"></textarea>
       </div>
-  </form>
+      
+    </div>
+  </div>
+
+    
+</form>
+
