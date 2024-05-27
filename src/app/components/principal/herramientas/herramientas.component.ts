@@ -2,15 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HerramientasService } from '../../../core/services/herramientas.service';
 import { Herramientas } from '../../../core/interfaces/interface.herramientas';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-herramientas',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './herramientas.component.html',
   styleUrls: ['./herramientas.component.css']
 })
 export default class HerramientasComponent implements OnInit {
+
+  //GET
+  _listaherramientas: Herramientas[] = [];
+
   formHerramientas!: FormGroup;
   mostrarBotones = false
 
@@ -29,7 +34,7 @@ export default class HerramientasComponent implements OnInit {
       stock: ['', Validators.required],
       ubicacion: ['', Validators.required],
       precioPedido: ['', Validators.required],
-      status: ['', Validators.required],
+      status: ['', Validators.required], 
       descripcion: ['', Validators.required],
       observaciones: ['', Validators.required]
     });
@@ -40,7 +45,7 @@ export default class HerramientasComponent implements OnInit {
   listaHerramientas() {
 
     this._herramientasService.listaHerramienta().subscribe((data) => {
-      console.log(data)
+      this._listaherramientas = data;
     })
   }
 
@@ -72,8 +77,4 @@ export default class HerramientasComponent implements OnInit {
     this.formHerramientas.reset();
   }
 
-  cancelar() {
-    console.log('cancelar');
-
-  }
 }

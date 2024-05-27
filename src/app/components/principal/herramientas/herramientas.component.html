@@ -1,22 +1,73 @@
-
-
-
-
   <div class="card">
     <div class="card-header">
       
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center mt-2">
         <h5>HERRAMIENTAS</h5> 
       </div>
+
     </div>
 
     <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-light table-hover table-bordered">
+          <thead class="">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Codigo</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Observaciones</th>
+              <th scope="col">Ubicación</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Cantidad Minima</th>
+              <th scope="col">Status</th>
+              <th scope="col">FCM</th>
+              <th scope="col">UMB</th>
+              <th scope="col">Numero Parte</th>
+              <th scope="col">Precio Pedido</th>
+              <th scope="col">SM</th>
+              <th scope="col">CAP</th>
+              <th scope="col">Precio Estandar</th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+              
+              <tr *ngFor="let item of _listaherramientas">
+                <td style="text-align: center;">{{ item.idherramienta }}</td>
+                <td style="text-align: center;">{{ item.codigoant }}</td>
+                <td style="text-align: center;">{{ item.nombre }}</td>
+                <td style="text-align: center;">{{ item.fecha }}</td>
+                <td style="text-align: center;">{{ item.stock }}</td>
+                <td style="text-align: center;">{{ item.observaciones }}</td>
+                <td style="text-align: center;">{{ item.ubicacion }}</td>
+                <td style="text-align: center;">{{ item.descripcion }}</td>
+                <td style="text-align: center;">{{ item.cantidadminima }}</td>
+                <td style="text-align: center;">{{ item.status }}</td>
+                <td style="text-align: center;">{{ item.fcm }}</td>
+                <td style="text-align: center;">{{ item.umb }}</td>
+                <td style="text-align: center;">{{ item.numeroparte }}</td>
+                <td style="text-align: center;">{{ item.preciopedido }}</td>
+                <td style="text-align: center;">{{ item.sm }}</td>
+                <td style="text-align: center;">{{ item.cap }}</td>
+                <td style="text-align: center;">{{ item.precioestandar }}</td>
+              </tr>
+                     
+          </tbody>
+        </table>
+      </div>
 
     </div>
 
     <footer>
 
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar Herrmaienta</button>
+      <div class="d-flex justify-content-center mb-3">
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar Herrmaienta</button>
+
+      </div>
 
     </footer>
   </div>
@@ -99,7 +150,6 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-success" (click)="agregarHerramienta(); limpiar()">Agregar</button>
             <button type="button" class="btn btn-info" (click)="limpiar()">Modificar</button>
-            <button type="button" class="btn btn-info" (click)="cancelar()">Cancelar</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
       </div>
@@ -107,7 +157,3 @@
   </div>
 
 </form>
-
-    
-
-
