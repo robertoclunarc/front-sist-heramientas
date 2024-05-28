@@ -61,4 +61,5 @@ export class LoginComponent implements OnInit {
       alert('Hubo un problema durante el login. Por favor, intenta nuevamente más tarde.');
     }
   }
+
 }

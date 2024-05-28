@@ -9,52 +9,59 @@
 
     <div class="card-body">
 
+      <form class="d-flex mb-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
       <div class="table-responsive">
-        <table class="table table-light table-hover table-bordered">
+        <table class="table table-sm table-light table-hover">
           <thead class="">
             <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Codigo</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Observaciones</th>
-              <th scope="col">Ubicación</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Cantidad Minima</th>
-              <th scope="col">Status</th>
-              <th scope="col">FCM</th>
-              <th scope="col">UMB</th>
-              <th scope="col">Numero Parte</th>
-              <th scope="col">Precio Pedido</th>
-              <th scope="col">SM</th>
-              <th scope="col">CAP</th>
-              <th scope="col">Precio Estandar</th>
+              <th style="text-align: center;" ></th>
+              <th style="text-align: center;" >ID</th>
+              <th style="text-align: center;" >Codigo</th>
+              <th style="text-align: center;" >Nombre</th>
+              <th style="text-align: center;" >Fecha</th>
+              <th style="text-align: center;" >Stock</th>
+              <th style="text-align: center;" >Observaciones</th>
+              <th style="text-align: center;" >Ubicación</th>
+              <th style="text-align: center;" >Descripción</th>
+              <th style="text-align: center;" >Cantidad Minima</th>
+              <th style="text-align: center;" >Status</th>
+              <th style="text-align: center;" >FCM</th>
+              <th style="text-align: center;" >UMB</th>
+              <th style="text-align: center;" >Numero Parte</th>
+              <th style="text-align: center;" >Precio Pedido</th>
+              <th style="text-align: center;" >SM</th>
+              <th style="text-align: center;" >CAP</th>
+              <th style="text-align: center;" >Precio Estandar</th>
             </tr>
           </thead>
 
           <tbody class="table-group-divider">
-              
-              <tr *ngFor="let item of _listaherramientas">
-                <td style="text-align: center;">{{ item.idherramienta }}</td>
-                <td style="text-align: center;">{{ item.codigoant }}</td>
-                <td style="text-align: center;">{{ item.nombre }}</td>
-                <td style="text-align: center;">{{ item.fecha }}</td>
-                <td style="text-align: center;">{{ item.stock }}</td>
-                <td style="text-align: center;">{{ item.observaciones }}</td>
-                <td style="text-align: center;">{{ item.ubicacion }}</td>
-                <td style="text-align: center;">{{ item.descripcion }}</td>
-                <td style="text-align: center;">{{ item.cantidadminima }}</td>
-                <td style="text-align: center;">{{ item.status }}</td>
-                <td style="text-align: center;">{{ item.fcm }}</td>
-                <td style="text-align: center;">{{ item.umb }}</td>
-                <td style="text-align: center;">{{ item.numeroparte }}</td>
-                <td style="text-align: center;">{{ item.preciopedido }}</td>
-                <td style="text-align: center;">{{ item.sm }}</td>
-                <td style="text-align: center;">{{ item.cap }}</td>
-                <td style="text-align: center;">{{ item.precioestandar }}</td>
-              </tr>
-                     
+
+            <tr *ngFor="let item of _listaherramientas">
+              <td><button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success btn-sm">Editar</button></td>
+              <td style="text-align: center; min-width: 100px;">{{ item.idherramienta }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.codigoant }}</td>
+              <td style="text-align: center; min-width: 150px;">{{ item.nombre }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.fecha }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.stock }}</td>
+              <td style="text-align: center; min-width: 150px;">{{ item.observaciones }}</td>
+              <td style="text-align: center; min-width: 150px;">{{ item.ubicacion }}</td>
+              <td style="text-align: center; min-width: 200px;">{{ item.descripcion }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.cantidadminima }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.status }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.fcm }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.umb }}</td>
+              <td style="text-align: center; min-width: 150px;">{{ item.numeroparte }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.preciopedido }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.sm }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.cap }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.precioestandar }}</td>
+            </tr>
+
           </tbody>
         </table>
       </div>
@@ -83,7 +90,7 @@
         <div class="modal-content">
           <div class="modal-header">  
             
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregue Herramienta Nueva</h1>
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">{{operacion}}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
@@ -98,16 +105,9 @@
                 <label for="inputFecha" class="form-label">Fecha</label>
                 <input formControlName="fecha" type="date" class="form-control" id="inputFecha">
               </div>
-              <div class="col-md-4 p-2">
+              <div class="col-md-8 p-2">
                 <label for="inputNombre" class="form-label">Nombre</label>
                 <input formControlName="nombre" type="text" class="form-control" id="inputNombre" placeholder="ADAPTADOR P/RATCHET DE 1/2A 3/8">
-              </div>
-              <div class="col-md-4 p-2">
-                <label for="inputBusqueda" class="form-label">Busqueda de Herramientas</label>
-                <select id="inputBusqueda" class="form-select">
-                  <option selected>Choose...</option>
-                  <option>...</option>
-                </select>
               </div>
             </div>
         
@@ -148,8 +148,7 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="agregarHerramienta(); limpiar()">Agregar</button>
-            <button type="button" class="btn btn-info" (click)="limpiar()">Modificar</button>
+            <button type="button" class="btn btn-success" (click)="agregarHerramienta()">{{operacion}}</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
       </div>

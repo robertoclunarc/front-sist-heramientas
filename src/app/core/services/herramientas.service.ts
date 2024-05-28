@@ -22,7 +22,11 @@ export class HerramientasService {
     return this.http.post<void>(`${this.api_uri}/herramienta/insertar`, herramientas);
   }
 
-  modificarHerramienta(id: number): Observable<Herramientas> {
-    return this.http.get<Herramientas>(`${this.api_uri}/update${id}`)
+  getIdHerramienta(id: number): Observable<Herramientas> {
+    return this.http.get<Herramientas>(`${this.api_uri}/getid${id}`)
+  }
+
+  editarHerramienta(id: number, herramienta: Herramientas): Observable<void> {
+    return this.http.put<void>(`${this.api_uri}/update${id}`, herramienta)
   }
 }

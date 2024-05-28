@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, numberAttribute } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HerramientasService } from '../../../core/services/herramientas.service';
 import { Herramientas } from '../../../core/interfaces/interface.herramientas';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-herramientas',
@@ -15,30 +16,43 @@ export default class HerramientasComponent implements OnInit {
 
   //GET
   _listaherramientas: Herramientas[] = [];
-
   formHerramientas!: FormGroup;
-  mostrarBotones = false
+  id: number;
+  operacion: string = 'Agregar Herramienta '
 
   constructor(
-    private fb: FormBuilder, private _herramientasService: HerramientasService) { }
+    private fb: FormBuilder,
+    private _herramientasService: HerramientasService,
+    private aRouter: ActivatedRoute,
+    ) 
+    
+    { 
+      this.formHerramientas = this.fb.group({
+        idherramienta: [''],
+        fecha: ['', Validators.required],
+        nombre: ['', Validators.required],
+        marca: ['', Validators.required],
+        stock: ['', Validators.required],
+        ubicacion: ['', Validators.required],
+        precioPedido: ['', Validators.required],
+        status: ['', Validators.required], 
+        descripcion: ['', Validators.required],
+        observaciones: ['', Validators.required]
+      });
+
+      this.id = Number (this.aRouter.snapshot.paramMap.get('idherramienta'));
+    }
 
   ngOnInit(): void {
 
     this.listaHerramientas();
-    
-    this.formHerramientas = this.fb.group({
-      idherramienta: [''],
-      fecha: ['', Validators.required],
-      nombre: ['', Validators.required],
-      marca: ['', Validators.required],
-      stock: ['', Validators.required],
-      ubicacion: ['', Validators.required],
-      precioPedido: ['', Validators.required],
-      status: ['', Validators.required], 
-      descripcion: ['', Validators.required],
-      observaciones: ['', Validators.required]
-    });
 
+    
+    if(this.id !== 0) {
+      this.operacion = 'Editar Herramienta ';
+      this.herramientaPorId(this.id);
+    }
+    
     console.log(this.listaHerramientas)
   }
 
@@ -47,6 +61,22 @@ export default class HerramientasComponent implements OnInit {
     this._herramientasService.listaHerramienta().subscribe((data) => {
       this._listaherramientas = data;
     })
+  }
+
+  herramientaPorId(id: number) {
+    this._herramientasService.getIdHerramienta(id).subscribe((data: Herramientas) => {
+      this.formHerramientas.patchValue({
+
+        _idherramienta: data.idherramienta,
+        _fecha: data.fecha,
+        _nombre: data.nombre,
+        _marca: data.marca,
+        _stock: data.stock,
+        _ubicacion: data.ubicacion,
+        _preciopedido: data.preciopedido,
+
+      })
+    });
   }
 
   agregarHerramienta() {
@@ -62,18 +92,22 @@ export default class HerramientasComponent implements OnInit {
 
     };
 
-    this._herramientasService.agregarHerramienta(herramientas).subscribe(() => {
-      console.log('Herramienta Agregada');
-    })
+    if(this.id !== 0) {
 
-    this.limpiar();
-  }
+      //Editar Herramienta
+      herramientas.idherramienta = this.id;
+      this._herramientasService.editarHerramienta(this.id, herramientas).subscribe(() => {
+        console.log('Herramienta Actualizada');
 
-  modificarHerramienta() {
-    console.log('modificarHerramienta');
-  }
+      });
 
-  limpiar() {
+    } else {
+
+      //Agregar Herramienta
+      this._herramientasService.agregarHerramienta(herramientas).subscribe(() => {
+        console.log('Herramienta Agregada');
+      })
+    }
     this.formHerramientas.reset();
   }
 
