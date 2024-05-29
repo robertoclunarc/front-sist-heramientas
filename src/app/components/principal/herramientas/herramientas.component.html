@@ -1,9 +1,12 @@
   <div class="card">
-    <div class="card-header">
-      
-      <div class="d-flex justify-content-center mt-2">
-        <h5>HERRAMIENTAS</h5> 
-      </div>
+    <div class="card-header d-flex">
+
+        <div class="p-2 w-100">
+          <h5>HERRAMIENTAS</h5> 
+        </div>
+        <div class="p-2 flex-shrink-1">
+          <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo</button>
+        </div>
 
     </div>
 
@@ -15,8 +18,8 @@
       </form>
 
       <div class="table-responsive">
-        <table class="table table-sm table-light table-hover">
-          <thead class="">
+        <table class="table justify-content-center table-sm table-light table-hover">
+          <thead>
             <tr>
               <th style="text-align: center;" ></th>
               <th style="text-align: center;" >ID</th>
@@ -42,7 +45,7 @@
           <tbody class="table-group-divider">
 
             <tr *ngFor="let item of _listaherramientas">
-              <td><button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success btn-sm">Editar</button></td>
+              <td><button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editar(item)" class="btn btn-success btn-sm">Editar</button></td>
               <td style="text-align: center; min-width: 100px;">{{ item.idherramienta }}</td>
               <td style="text-align: center; min-width: 100px;">{{ item.codigoant }}</td>
               <td style="text-align: center; min-width: 150px;">{{ item.nombre }}</td>
@@ -69,12 +72,26 @@
     </div>
 
     <footer>
-
-      <div class="d-flex justify-content-center mb-3">
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar Herrmaienta</button>
-
-      </div>
+<!--
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [disabled]="currentPage === 1">
+            <a class="page-link" (click)="goToPreviousPage()" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+    
+          <li class="page-item" *ngFor="let pageNumber of pageNumbers; let i = index">
+            <a class="page-link" (click)="goToPage(pageNumber)" [ngClass]="{ 'active': currentPage === pageNumber }">{{ pageNumber }}</a>
+          </li>
+    
+          <li class="page-item" [disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="goToNextPage()" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>  -->
 
     </footer>
   </div>
@@ -90,8 +107,9 @@
         <div class="modal-content">
           <div class="modal-header">  
             
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">{{operacion}}</h1>
+            <h1 class="modal-title fs-5" id="staticBackdropLabel"> {{operacion}} </h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
           </div>
 
           <div class="modal-body">
@@ -148,7 +166,7 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="agregarHerramienta()">{{operacion}}</button>
+            <button type="button" class="btn btn-success" (click)="agregarHerramienta()"> Guardar </button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
       </div>

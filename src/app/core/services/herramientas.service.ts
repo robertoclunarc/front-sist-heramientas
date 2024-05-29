@@ -23,7 +23,7 @@ export class HerramientasService {
   }
 
   getIdHerramienta(id: number): Observable<Herramientas> {
-    return this.http.get<Herramientas>(`${this.api_uri}/getid${id}`)
+    return this.http.get<Herramientas>(`${this.api_uri}/herramienta/getid/${id}`)
   }
 
   editarHerramienta(id: number, herramienta: Herramientas): Observable<void> {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { routes } from '../../app.routes';
 import { CommonModule } from '@angular/common';
@@ -8,7 +7,7 @@ import { environment } from '../../../environments/environment.development';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [SidebarComponent, RouterModule, CommonModule],
+  imports: [ RouterModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

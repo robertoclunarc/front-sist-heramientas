@@ -14,10 +14,13 @@ import { ActivatedRoute, Route } from '@angular/router';
 })
 export default class HerramientasComponent implements OnInit {
 
-  //GET
   _listaherramientas: Herramientas[] = [];
+  currentPage = 1;
+  itemsPerPage = 10; // Adjust items per page as needed
+  totalPages = 0;
   formHerramientas!: FormGroup;
   id: number;
+  herramienta: Herramientas = {};
   operacion: string = 'Agregar Herramienta '
 
   constructor(
@@ -46,11 +49,10 @@ export default class HerramientasComponent implements OnInit {
   ngOnInit(): void {
 
     this.listaHerramientas();
-
     
     if(this.id !== 0) {
       this.operacion = 'Editar Herramienta ';
-      this.herramientaPorId(this.id);
+      
     }
     
     console.log(this.listaHerramientas)
@@ -63,25 +65,41 @@ export default class HerramientasComponent implements OnInit {
     })
   }
 
-  herramientaPorId(id: number) {
+  /*herramientaPorId(id: number) {
     this._herramientasService.getIdHerramienta(id).subscribe((data: Herramientas) => {
       this.formHerramientas.patchValue({
 
-        _idherramienta: data.idherramienta,
-        _fecha: data.fecha,
-        _nombre: data.nombre,
-        _marca: data.marca,
-        _stock: data.stock,
-        _ubicacion: data.ubicacion,
-        _preciopedido: data.preciopedido,
+        idherramienta: data.idherramienta,
+        fecha: data.fecha,
+        nombre: data.nombre,
+        marca: data.marca,
+        stock: data.stock,
+        ubicacion: data.ubicacion,
+        preciopedido: data.preciopedido,
 
       })
     });
+  }*/
+
+  editar(data: Herramientas){
+    this.operacion="Actualizar Herramienta"
+    console.log(data);
+    if (data.idherramienta){
+      this.formHerramientas.patchValue({
+
+        nombre: data.nombre,
+        marca: data.marca,
+        stock: data.stock,
+        ubicacion: data.ubicacion,
+        preciopedido: data.preciopedido,
+
+      })
+    }
   }
 
   agregarHerramienta() {
 
-    const herramientas: Herramientas = {
+    const herramienta: Herramientas = {
       idherramienta: this.formHerramientas.value.idherramienta,
       fecha: this.formHerramientas.value.fecha,
       nombre: this.formHerramientas.value.nombre,
@@ -92,23 +110,33 @@ export default class HerramientasComponent implements OnInit {
 
     };
 
-    if(this.id !== 0) {
+    if(herramienta.idherramienta !== undefined) {
 
       //Editar Herramienta
-      herramientas.idherramienta = this.id;
-      this._herramientasService.editarHerramienta(this.id, herramientas).subscribe(() => {
+      
+      this._herramientasService.editarHerramienta(herramienta.idherramienta, herramienta).subscribe(() => {
         console.log('Herramienta Actualizada');
+      this.formHerramientas.reset();
 
       });
 
     } else {
 
       //Agregar Herramienta
-      this._herramientasService.agregarHerramienta(herramientas).subscribe(() => {
+      this._herramientasService.agregarHerramienta(herramienta).subscribe(() => {
         console.log('Herramienta Agregada');
+      this.formHerramientas.reset();
+        
       })
+
     }
-    this.formHerramientas.reset();
+   
+  }
+
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
   }
 
 }
