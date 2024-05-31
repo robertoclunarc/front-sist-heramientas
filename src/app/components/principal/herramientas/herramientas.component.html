@@ -17,8 +17,15 @@
     <div class="card-body">
 
       <form class="d-flex mb-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+
+        <input
+        id="nombre"
+         class="form-control me-2"
+         [(ngModel)]="searchTerm" 
+         type="search" placeholder="buscar Herramienta"
+          aria-label="Search">
+
+        <button class="btn btn-outline-success" (click)="listaHerramientas()" type="submit">Search</button>  
       </form>
 
       <div class="table-responsive">
@@ -48,7 +55,7 @@
 
           <tbody class="table-group-divider">
 
-            <tr *ngFor="let item of _listaherramientas">
+            <tr *ngFor="let item of herramientas">
               <td><button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editar(item)" class="btn btn-success btn-sm"><i class="bi bi-pencil-square">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -77,31 +84,23 @@
           </tbody>
         </table>
       </div>
-
     </div>
-
     <footer>
-<!--
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item" [disabled]="currentPage === 1">
-            <a class="page-link" (click)="goToPreviousPage()" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-    
-          <li class="page-item" *ngFor="let pageNumber of pageNumbers; let i = index">
-            <a class="page-link" (click)="goToPage(pageNumber)" [ngClass]="{ 'active': currentPage === pageNumber }">{{ pageNumber }}</a>
-          </li>
-    
-          <li class="page-item" [disabled]="currentPage === totalPages">
-            <a class="page-link" (click)="goToNextPage()" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>  -->
-
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="collectionSize"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          (pageChange)="refreshCountries()"
+        >
+        </ngb-pagination>
+      
+        <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+          <option [ngValue]="2">2 items per page</option>
+          <option [ngValue]="4">4 items per page</option>
+          <option [ngValue]="6">6 items per page</option>
+        </select>
+      </div>
     </footer>
   </div>
 
@@ -112,7 +111,7 @@
     <!-- Modal -->
     
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">  
             
@@ -123,53 +122,121 @@
 
           <div class="modal-body">
 
-            <div class="d-flex justify-content-between">
+            <div class="row col-sm-max">
 
-              <div class="d-flex justify-content-start p-2 ">
-                <div class="col-md-6 me-4">
-                  <label for="inputFecha" class="form-label">Fecha</label>
-                  <input formControlName="fecha" type="text" readonly class="form-control" id="inputFecha" >
-                </div>
-                <div class="col-md-8">
-                  <label for="inputEstatus" class="form-label">Ubicación</label>
-                  <input formControlName="ubicacion" type="text" class="form-control" id="inputEstatus">
-                </div>
-              </div>
+              <!-- CAJA DERECHA -->
+              <div class="col-sm-6">
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-4">
+                    <label for="inputFecha" class="form-label">Fecha</label>
+                    <input formControlName="fecha" type="text" readonly class="form-control" id="inputFecha" >
+                  </div>
+                  <div class="p-2 col-md-5">
+                    <label for="inputMarca" class="form-label">Marca</label>
+                    <input formControlName="marca" type="text" class="form-control" id="inputMarca">
+                  </div>
 
-              <div class="d-flex justify-content-end p-2">
-                <div class="col-md-8 me-4">
-                  <label for="inputMarca" class="form-label">Marca</label>
-                  <input formControlName="marca" type="text" class="form-control" id="inputMarca">
                 </div>
-                <div class="col-md-8 ms-auto">
-                  <label for="inputEstatus" class="form-label">Estatus</label>
-                  <select formControlName="estatus" class="form-select" id="inputEstatus" required>    
-                    <option value="ACTIVO">ACTIVO</option>
-                    <option value="INACTIVO">INACTIVO</option>
-                  </select>
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-9">
+                    <label for="inputNombre" class="form-label">Nombre</label>
+                    <input formControlName="nombre" type="text" class="form-control" id="inputNombre">
+                  </div>
+  
                 </div>
+
+                <div class="d-flex">
+                  <div class="p-2 col-md-9">
+                    <label for="inputParte" class="form-label">Numero Parte</label>
+                    <input formControlName="numeroparte" type="text" class="form-control" id="inputParte">
+                  </div>
+                </div>
+
+                <div class="d-flex">
+
+                  <div class="p-2 col-md-5">
+                    <label for="inputSm" class="form-label">SM</label>
+                    <input formControlName="sm" type="text" class="form-control" id="inputSm">
+                  </div>
+
+                  <div class="p-2 col-md-4">
+                    <label for="inputCap" class="form-label">CAP</label>
+                    <input formControlName="cap" type="text" class="form-control" id="inputCap">
+                  </div>
+
+                  </div>
+  
+                </div>
+  
+              <!-- CAJA IZQUIERDA -->
+              <div class="col-sm-6">
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-5">
+                    <label for="inputStock" class="form-label">Stock</label>
+                    <input formControlName="stock" type="number" class="form-control" id="inputStock">
+                  </div>
+  
+                  <div class="p-2 col-md-5">
+                    <label for="inputEstatus" class="form-label">Estatus</label>
+                    <select formControlName="estatus" class="form-select" id="inputEstatus" required>    
+                      <option value="ACTIVO">ACTIVO</option>
+                      <option value="INACTIVO">INACTIVO</option>
+                    </select>
+                  </div>
+  
+                </div>
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-5">
+                    <label for="inputEstatus" class="form-label">Ubicación</label>
+                    <input formControlName="ubicacion" type="text" class="form-control" id="inputEstatus">
+                  </div>
+    
+                  <div class="p-2 col-md-5">
+                    <label for="inputEstatus" class="form-label">Precio Pedido</label>
+                    <input formControlName="preciopedido" type="number" class="form-control" id="inputEstatus">
+                  </div>
+  
+                </div>
+
+                <div class="d-flex">
+
+                  <div class="p-2 col-md-5">
+                    <label for="inputCantidad" class="form-label">Cantidad Minima</label>
+                    <input formControlName="cantidadminima" type="number" class="form-control" id="inputCantidad">
+                  </div>
+
+                  <div class="p-2 col-md-5">
+                    <label for="inputEstandar" class="form-label">Precio Estandar</label>
+                    <input formControlName="precioestandar" type="number" class="form-control" id="inputEstandar">
+                  </div> 
+
+                </div>
+
+                <div class="d-flex">
+
+                  <div class="p-2 col-md-5">
+                    <label for="inputFcm" class="form-label">FCM</label>
+                    <input formControlName="fcm" type="number" class="form-control" id="inputFcm">
+                  </div>
+
+                  <div class="p-2 col-md-5">
+                    <label for="inputUmb" class="form-label">UMB</label>
+                    <input formControlName="umb" type="number" class="form-control" id="inputUmb">
+                  </div>
+
+                </div>
+
               </div>
+            </div>
               
-            </div>
-        
-            <div class="d-flex justify-content-between p-2">
-
-              <div class="col-lg-6 me-4">
-                <label for="inputNombre" class="form-label">Nombre</label>
-                <input formControlName="nombre" type="text" class="form-control" id="inputNombre">
-              </div>
-
-              <div class="d-flex justify-content-end">
-                <div class="col-md-6 me-5">
-                  <label for="inputStock" class="form-label">Stock</label>
-                  <input formControlName="stock" type="number" class="form-control" id="inputStock">
-                </div>
-                <div class="col-md-6 ms-auto">
-                  <label for="inputEstatus" class="form-label">Precio Pedido</label>
-                  <input formControlName="precioPedido" type="number" class="form-control" id="inputEstatus">
-                </div>
-              </div>     
-            </div>
         
             <div class="mb-3">
               <label for="exampleDescripcion" class="form-label">Descripción</label>

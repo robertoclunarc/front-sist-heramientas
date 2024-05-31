@@ -1,16 +1,17 @@
 import { Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HerramientasService } from '../../../core/services/herramientas.service';
 import { Herramientas } from '../../../core/interfaces/interface.herramientas';
 import { CommonModule, formatDate } from '@angular/common';
 import { ActivatedRoute,} from '@angular/router';
+import { NgbPagination, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 declare const bootstrap: any;
 
 @Component({
   selector: 'app-herramientas',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule ],
+  imports: [ CommonModule, ReactiveFormsModule, NgbPaginationModule, NgbPagination, FormsModule ],
   templateUrl: './herramientas.component.html',
   styleUrls: ['./herramientas.component.css'],
   
@@ -18,10 +19,12 @@ declare const bootstrap: any;
 export default class HerramientasComponent implements OnInit {
  
   _listaherramientas: Herramientas[] = [];
+  herramientas: Herramientas[] = [];
+  pageSize = 15;
+  page = 1;
+  collectionSize: number = 10;
+  searchTerm: string = '';
 
-  /*currentPage = 1;
-  itemsPerPage = 10; // Adjust items per page as needed
-  totalPages = 0;*/
   formHerramientas!: FormGroup;
   
   herramienta: Herramientas = {};
@@ -37,7 +40,7 @@ export default class HerramientasComponent implements OnInit {
     ) 
     
     { 
-      this.currentDate = formatDate( new Date(), 'yyyy-MM-dd HH:mm', 'es-VE');
+      this.currentDate = formatDate( new Date(), 'yyyy-MM-dd', 'es-VE');
       this.formHerramientas = this.fb.group({
         idherramienta: [undefined],
         codigoant: ['', Validators.required],
@@ -73,7 +76,8 @@ export default class HerramientasComponent implements OnInit {
 
     await this._herramientasService.listaHerramienta().subscribe((data) => {
       this._listaherramientas = data;
-      console.log(this._listaherramientas)
+      console.log(this._listaherramientas);
+      this.collectionSize = this._listaherramientas.length;
     })
     
   }
@@ -96,8 +100,14 @@ export default class HerramientasComponent implements OnInit {
         ubicacion: data.ubicacion,
         observacioni: data.observacioni,
         cantidadminima: data.cantidadminima,
+        estatus: data.estatus,
+        fcm: data.fcm,
+        umb: data.umb,
+        numero: data.numeroparte,
         preciopedido: data.preciopedido,
-        estatus: data.estatus
+        sm: data.sm,
+        cap: data.cap,
+        precioestandar: data.precioestandar
       })
     }
   }
@@ -139,5 +149,18 @@ export default class HerramientasComponent implements OnInit {
       modalInstance.hide();
     }
   }
+
+  get filteredHerramientas() {
+    return this._listaherramientas
+      .filter(herramienta => herramienta.nombre?.toLowerCase().includes(this.searchTerm.toLowerCase()))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
+  refreshCountries() {
+		this.herramientas = this._listaherramientas.map((nombre, i) => ({ id: i + 1, ...nombre })).slice(
+			(this.page - 1) * this.pageSize,
+			(this.page - 1) * this.pageSize + this.pageSize,
+		);
+	}
 
 }
