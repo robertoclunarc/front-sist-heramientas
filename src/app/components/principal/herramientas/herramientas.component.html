@@ -5,7 +5,11 @@
           <h5>HERRAMIENTAS</h5> 
         </div>
         <div class="p-2 flex-shrink-1">
-          <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo</button>
+          <button type="button" class="btn btn-success btn-sm" (click)="nuevo()" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle-fill">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+            </svg>
+          </i></button>
         </div>
 
     </div>
@@ -18,7 +22,7 @@
       </form>
 
       <div class="table-responsive">
-        <table class="table justify-content-center table-sm table-light table-hover">
+        <table class="table justify-content-center table-light table-hover">
           <thead>
             <tr>
               <th style="text-align: center;" ></th>
@@ -45,17 +49,22 @@
           <tbody class="table-group-divider">
 
             <tr *ngFor="let item of _listaherramientas">
-              <td><button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editar(item)" class="btn btn-success btn-sm">Editar</button></td>
+              <td><button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editar(item)" class="btn btn-success btn-sm"><i class="bi bi-pencil-square">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                </svg>
+              </i></button></td>
               <td style="text-align: center; min-width: 100px;">{{ item.idherramienta }}</td>
               <td style="text-align: center; min-width: 100px;">{{ item.codigoant }}</td>
               <td style="text-align: center; min-width: 150px;">{{ item.nombre }}</td>
-              <td style="text-align: center; min-width: 100px;">{{ item.fecha }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.fecha | date: "dd/MM/yyyy" }}</td>
               <td style="text-align: center; min-width: 100px;">{{ item.stock }}</td>
               <td style="text-align: center; min-width: 150px;">{{ item.observaciones }}</td>
               <td style="text-align: center; min-width: 150px;">{{ item.ubicacion }}</td>
               <td style="text-align: center; min-width: 200px;">{{ item.descripcion }}</td>
               <td style="text-align: center; min-width: 100px;">{{ item.cantidadminima }}</td>
-              <td style="text-align: center; min-width: 100px;">{{ item.status }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.estatus }}</td>
               <td style="text-align: center; min-width: 100px;">{{ item.fcm }}</td>
               <td style="text-align: center; min-width: 100px;">{{ item.umb }}</td>
               <td style="text-align: center; min-width: 150px;">{{ item.numeroparte }}</td>
@@ -98,7 +107,7 @@
 
 
 
-  <form [formGroup]="formHerramientas" class="row g-3">
+<form [formGroup]="formHerramientas" class="row g-3">
 
     <!-- Modal -->
     
@@ -114,45 +123,52 @@
 
           <div class="modal-body">
 
-            <div class="d-flex justify-content-evenly mb-3">
-              <div class="col-md-2 p-2">
-                <label for="inputCodigo" class="form-label">ID</label>
-                <input formControlName="idherramienta" type="number" class="form-control" id="inputCodigo" placeholder="000000">
+            <div class="d-flex justify-content-between">
+
+              <div class="d-flex justify-content-start p-2 ">
+                <div class="col-md-6 me-4">
+                  <label for="inputFecha" class="form-label">Fecha</label>
+                  <input formControlName="fecha" type="text" readonly class="form-control" id="inputFecha" >
+                </div>
+                <div class="col-md-8">
+                  <label for="inputEstatus" class="form-label">Ubicación</label>
+                  <input formControlName="ubicacion" type="text" class="form-control" id="inputEstatus">
+                </div>
               </div>
-              <div class="col-md-2 p-2">
-                <label for="inputFecha" class="form-label">Fecha</label>
-                <input formControlName="fecha" type="date" class="form-control" id="inputFecha">
+
+              <div class="d-flex justify-content-end p-2">
+                <div class="col-md-8 me-4">
+                  <label for="inputMarca" class="form-label">Marca</label>
+                  <input formControlName="marca" type="text" class="form-control" id="inputMarca">
+                </div>
+                <div class="col-md-8 ms-auto">
+                  <label for="inputEstatus" class="form-label">Estatus</label>
+                  <select formControlName="estatus" class="form-select" id="inputEstatus" required>    
+                    <option value="ACTIVO">ACTIVO</option>
+                    <option value="INACTIVO">INACTIVO</option>
+                  </select>
+                </div>
               </div>
-              <div class="col-md-8 p-2">
-                <label for="inputNombre" class="form-label">Nombre</label>
-                <input formControlName="nombre" type="text" class="form-control" id="inputNombre" placeholder="ADAPTADOR P/RATCHET DE 1/2A 3/8">
-              </div>
+              
             </div>
         
-            <div class="d-flex justify-content-evenly mb-3">
-              <div class="ms-auto p-2">
-                <label for="inputMarca" class="form-label">Marca</label>
-                <input formControlName="marca" type="text" class="form-control" id="inputMarca" placeholder="STANLEY">
+            <div class="d-flex justify-content-between p-2">
+
+              <div class="col-lg-6 me-4">
+                <label for="inputNombre" class="form-label">Nombre</label>
+                <input formControlName="nombre" type="text" class="form-control" id="inputNombre">
               </div>
-              <div class="ms-auto p-2">
-                <label for="inputStock" class="form-label">Stock</label>
-                <input formControlName="stock" type="number" class="form-control" id="inputStock" placeholder="0">
-              </div>
-              <div class="ms-auto p-2">
-                <label for="inputEstatus" class="form-label">Estatus Producto</label>
-                <input formControlName="status" type="number" class="form-control" id="inputEstatus" placeholder="0">
-              </div>
-      
-              <div class="ms-auto p-2">
-                <label for="inputEstatus" class="form-label">Ubicación</label>
-                <input formControlName="ubicacion" type="text" class="form-control" id="inputEstatus" placeholder="H 00001">
-              </div>
-      
-              <div class="ms-auto p-2">
-                <label for="inputEstatus" class="form-label">Precio Pedido</label>
-                <input formControlName="precioPedido" type="number" class="form-control" id="inputEstatus" placeholder="0">
-              </div>
-      
+
+              <div class="d-flex justify-content-end">
+                <div class="col-md-6 me-5">
+                  <label for="inputStock" class="form-label">Stock</label>
+                  <input formControlName="stock" type="number" class="form-control" id="inputStock">
+                </div>
+                <div class="col-md-6 ms-auto">
+                  <label for="inputEstatus" class="form-label">Precio Pedido</label>
+                  <input formControlName="precioPedido" type="number" class="form-control" id="inputEstatus">
+                </div>
+              </div>     
             </div>
         
             <div class="mb-3">

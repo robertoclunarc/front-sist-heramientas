@@ -6,13 +6,13 @@ export interface Devoluciones {
     idpedido?: number;
     codigoherramienta_ant?: string;
     idherramienta?: number;
-    fecha?: Date;
+    fecha?: string;
     cantidad?: number;
     observaciones?: number;
     status?: number;
     usuarioreg?: string;
-    fechareg?: Date;
+    fechareg?: string;
     usuariomod?: string;
-    fechamod?: Date
+    fechamod?: string
     
 }

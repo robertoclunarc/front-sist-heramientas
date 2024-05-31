@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
       // Devolver el objeto modificado
       return updatedRoute;
     });
-    console.log(this.menuItems) 
+    
   }
 
 

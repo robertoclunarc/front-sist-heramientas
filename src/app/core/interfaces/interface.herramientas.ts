@@ -7,13 +7,14 @@ export interface Herramientas {
     fecha?: string;
     stock?: number;
     marca?: string;
+    modelo?: string
     observaciones?: string;
    // idcategoria?: number;
     //categoriaant?:string;
     ubicacion?: number;
     observacioni?: string;
     cantidadminima?: number;
-    status?: string;
+    estatus?: string;
     fcm?: number;
     umb?: number;
     numeroparte?: string;

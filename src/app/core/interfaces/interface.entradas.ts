@@ -2,7 +2,7 @@ export interface Entradas {
 
     identrada?: number;
     codigoentradaant?: string;
-    fechaentrada?: Date;
+    fechaentrada?: string;
     codigoherramienta?: string;
     descripcion?: string;
     cantidad?: number;
@@ -15,9 +15,9 @@ export interface Entradas {
     provedor?: string;
     preciopedido?: number;
     precioestanadar?: number;
-    hora?: Date;
+    hora?: string;
     usuarioreg?: string;
-    fechareg?: Date;
+    fechareg?: string;
     usuariomod?: string;
-    fechamod?: Date;
+    fechamod?: string;
 }

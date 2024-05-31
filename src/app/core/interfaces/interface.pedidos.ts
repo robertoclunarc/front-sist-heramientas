@@ -4,16 +4,16 @@ export interface Pedidos {
     idpedidoant?: string;
     idsolicitante?: number;
     idpersonalant?: string;
-    fecha?: Date;
+    fecha?: string;
     destino?: string;
     despachado?: string;
     departamento?: string;
     observacion?: string;
     preciopedido?: number;
-    hora?: Date;
+    hora?: string;
     usuarioreg?: string;
-    fechareg?: Date;
+    fechareg?: string;
     usuariomod?: string;
-    fechamod?: Date;
+    fechamod?: string;
     
 }

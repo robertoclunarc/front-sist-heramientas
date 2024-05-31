@@ -4,8 +4,8 @@ export interface Prestamos {
     idcategoriaant?: string;
     descripcion?: string;
     usuarioreg?: string;
-    fechareg?: Date;
+    fechareg?: string;
     usuarimod?: string;
-    fechamod?: Date
+    fechamod?: string
     
 }

@@ -9,8 +9,8 @@ export interface Usuario {
     tipousuario?: string;
     estatus?: string;
     usuarioreg?: string;
-    fechareg?: Date;
+    fechareg?: string;
     usuariomod?: string;
-    fechamod?: Date
+    fechamod?: string
     
 }

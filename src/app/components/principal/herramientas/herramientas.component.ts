@@ -1,141 +1,142 @@
-import { Component, OnInit, numberAttribute } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HerramientasService } from '../../../core/services/herramientas.service';
 import { Herramientas } from '../../../core/interfaces/interface.herramientas';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Route } from '@angular/router';
+import { CommonModule, formatDate } from '@angular/common';
+import { ActivatedRoute,} from '@angular/router';
+
+declare const bootstrap: any;
 
 @Component({
   selector: 'app-herramientas',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ CommonModule, ReactiveFormsModule ],
   templateUrl: './herramientas.component.html',
-  styleUrls: ['./herramientas.component.css']
+  styleUrls: ['./herramientas.component.css'],
+  
 })
 export default class HerramientasComponent implements OnInit {
-
+ 
   _listaherramientas: Herramientas[] = [];
-  currentPage = 1;
+
+  /*currentPage = 1;
   itemsPerPage = 10; // Adjust items per page as needed
-  totalPages = 0;
+  totalPages = 0;*/
   formHerramientas!: FormGroup;
-  id: number;
+  
   herramienta: Herramientas = {};
-  operacion: string = 'Agregar Herramienta '
+  operacion: string = 'Agregar Herramienta ';
+  currentDate: string;
+
 
   constructor(
     private fb: FormBuilder,
     private _herramientasService: HerramientasService,
     private aRouter: ActivatedRoute,
+    
     ) 
     
     { 
+      this.currentDate = formatDate( new Date(), 'yyyy-MM-dd HH:mm', 'es-VE');
       this.formHerramientas = this.fb.group({
-        idherramienta: [''],
-        fecha: ['', Validators.required],
+        idherramienta: [undefined],
+        codigoant: ['', Validators.required],
+        descripcion: ['', Validators.required],
+        fecha: [this.currentDate, Validators.required],
+        stock: ['', Validators.required],
         nombre: ['', Validators.required],
         marca: ['', Validators.required],
-        stock: ['', Validators.required],
+        modelo: ['', Validators.required],
+        observaciones: ['', Validators.required],
         ubicacion: ['', Validators.required],
-        precioPedido: ['', Validators.required],
-        status: ['', Validators.required], 
-        descripcion: ['', Validators.required],
-        observaciones: ['', Validators.required]
+        observacioni: ['', Validators.required],
+        cantidadminima: ['', Validators.required],
+        estatus: ['', Validators.required],
+        fcm: ['', Validators.required],
+        umb: ['', Validators.required],
+        numeroparte: ['', Validators.required],
+        preciopedido: ['', Validators.required],
+        sm: ['', Validators.required],
+        cap: ['', Validators.required],
+        precioestandar: ['', Validators.required],
       });
 
-      this.id = Number (this.aRouter.snapshot.paramMap.get('idherramienta'));
+      
     }
 
   ngOnInit(): void {
 
     this.listaHerramientas();
-    
-    if(this.id !== 0) {
-      this.operacion = 'Editar Herramienta ';
-      
-    }
-    
-    console.log(this.listaHerramientas)
   }
 
-  listaHerramientas() {
+  async listaHerramientas() {
 
-    this._herramientasService.listaHerramienta().subscribe((data) => {
+    await this._herramientasService.listaHerramienta().subscribe((data) => {
       this._listaherramientas = data;
+      console.log(this._listaherramientas)
     })
+    
   }
 
-  /*herramientaPorId(id: number) {
-    this._herramientasService.getIdHerramienta(id).subscribe((data: Herramientas) => {
-      this.formHerramientas.patchValue({
-
-        idherramienta: data.idherramienta,
-        fecha: data.fecha,
-        nombre: data.nombre,
-        marca: data.marca,
-        stock: data.stock,
-        ubicacion: data.ubicacion,
-        preciopedido: data.preciopedido,
-
-      })
-    });
-  }*/
-
-  editar(data: Herramientas){
-    this.operacion="Actualizar Herramienta"
+  async editar(data: Herramientas){
+    await this.formHerramientas.reset();
+    this.operacion="Actualizar Herramienta";
     console.log(data);
-    if (data.idherramienta){
+    this.herramienta = data;
+    if (data.idherramienta!==undefined){
       this.formHerramientas.patchValue({
-
+        codigoant: data.codigoant,
+        descripcion: data.descripcion,
+        fecha: data.fecha ? formatDate(data.fecha, 'YYYY-MM-dd', 'es-VE'): "",
+        stock: data.stock,
         nombre: data.nombre,
         marca: data.marca,
-        stock: data.stock,
+        modelo: data.modelo,
+        observaciones: data.observaciones,
         ubicacion: data.ubicacion,
+        observacioni: data.observacioni,
+        cantidadminima: data.cantidadminima,
         preciopedido: data.preciopedido,
-
+        estatus: data.estatus
       })
     }
   }
 
-  agregarHerramienta() {
+  async agregarHerramienta() {
 
-    const herramienta: Herramientas = {
-      idherramienta: this.formHerramientas.value.idherramienta,
-      fecha: this.formHerramientas.value.fecha,
-      nombre: this.formHerramientas.value.nombre,
-      marca: this.formHerramientas.value.marca,
-      stock: this.formHerramientas.value.stock,
-      ubicacion: this.formHerramientas.value.ubicacion,
-      preciopedido: this.formHerramientas.value.precioPedido
-
-    };
-
-    if(herramienta.idherramienta !== undefined) {
-
-      //Editar Herramienta
-      
-      this._herramientasService.editarHerramienta(herramienta.idherramienta, herramienta).subscribe(() => {
-        console.log('Herramienta Actualizada');
-      this.formHerramientas.reset();
-
-      });
+    const hrmta: Herramientas = this.formHerramientas.value;
+    let response: any;
+    
+    if(this.herramienta.idherramienta != undefined && this.herramienta.idherramienta != null) {      
+      await this._herramientasService.editarHerramienta(this.formHerramientas.value.idherramienta, hrmta)
+      .toPromise()
+      .catch(err =>{
+        console.error(err);
+      })
 
     } else {
-
-      //Agregar Herramienta
-      this._herramientasService.agregarHerramienta(herramienta).subscribe(() => {
-        console.log('Herramienta Agregada');
-      this.formHerramientas.reset();
-        
-      })
-
+      response = await this._herramientasService.agregarHerramienta(hrmta);      
     }
-   
+    this.listaHerramientas();
+    this.cerrarModal()
+;    this.formHerramientas.reset();   
+    this.herramienta={};
   }
 
-  goToPreviousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
+  nuevo () {
+    this.formHerramientas.reset();
+    this.formHerramientas.patchValue({
+      fecha: this.currentDate,
+    });
+    this.herramienta = {};
+    
+  }
+
+  cerrarModal() {
+    const modalElement = document.getElementById('staticBackdrop');
+    if (modalElement) {
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      modalInstance.hide();
     }
   }
 
