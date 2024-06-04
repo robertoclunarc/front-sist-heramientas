@@ -1,1 +1,203 @@
-<p>solicitantes works!</p>
+<div class="card">
+    <div class="card-header d-flex">
+  
+        <div class="p-2 w-100">
+          <h5>SOLICITANTE</h5> 
+        </div>
+        <div class="p-2 flex-shrink-1">
+          <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle-fill">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+            </svg>
+          </i></button>
+        </div>
+  
+    </div>
+  
+    <div class="card-body">
+  
+   <!--   <form class="d-flex mb-3" role="search">
+  
+        <input
+        id="nombre"
+         class="form-control me-2"
+         [(ngModel)]="searchTerm" 
+         type="search" placeholder="Buscar Herramienta"
+          aria-label="Search">
+  
+        <button class="btn btn-outline-success" (click)="listaEntradas()" type="submit">Search</button>  
+      </form> 
+    -->
+  
+      <div class="table-responsive">
+        <table class="table justify-content-center table-light table-hover">
+          <thead>
+            <tr>
+              <th style="text-align: center;" ></th>
+              <th style="text-align: center;" >ID</th>
+              <th style="text-align: center;" >Codigo</th>
+              <th style="text-align: center;" >Nombre</th>
+              <th style="text-align: center;" >Area</th>
+              <th style="text-align: center;" >Departamento</th>
+            </tr>
+          </thead>
+  
+          <tbody class="table-group-divider">
+  
+            <tr *ngFor="let item of _listaSolicitantes">
+              <td><button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="btn btn-success btn-sm"><i class="bi bi-pencil-square">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                </svg>
+              </i></button></td>
+              <td style="text-align: center; min-width: 100px;">{{ item.idsolicitante }}</td>
+              <td style="text-align: center; min-width: 150px;">{{ item.idpersonalant }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.nombre }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.area }}</td>
+              <td style="text-align: center; min-width: 100px;">{{ item.departamento }}</td>
+            </tr>
+  
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <footer>
+    </footer>
+  
+  </div>
+  
+  <!--
+
+  <form [formGroup]="formSolicitante" class="row g-3">
+  
+    Modal 
+    
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">  
+            
+            <h1 class="modal-title fs-5" id="staticBackdropLabel"> ENTRADA </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  
+          </div>
+  
+          <div class="modal-body">
+  
+            <div class="row col-sm-max">
+  
+             CAJA DERECHA 
+              <div class="col-sm-6">
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-4">
+                    <label for="inputFecha" class="form-label">Fecha</label>
+                    <input formControlName="fechaentrada" type="text" readonly class="form-control" id="inputFecha" >
+                  </div>
+                  <div class="p-2 col-md-5">
+                    <label for="inputHerramienta" class="form-label">Herramienta</label>
+                    <input formControlName="codigoherramienta" type="text" class="form-control" id="inputHerramienta">
+                  </div>
+  
+                </div>
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-9">
+                    <label for="inputNombre" class="form-label">Proveedor</label>
+                    <input formControlName="provedor" type="text" class="form-control" id="inputNombre">
+                  </div>
+  
+                </div>
+  
+                <div class="d-flex">
+                  <div class="p-2 col-md-9">
+                    <label for="inputNota" class="form-label">Nota de Entrega</label>
+                    <input formControlName="notaentrega" type="text" class="form-control" id="inputNota">
+                  </div>
+                </div>
+  
+                <div class="d-flex">
+                  <div class="p-2 col-md-9">
+                    <label for="inputOrden" class="form-label">Orden Entrega</label>
+                    <input formControlName="ordencompra" type="text" class="form-control" id="inputOrden">
+                  </div>
+                </div>
+  
+                </div>
+  
+              CAJA IZQUIERDA 
+              <div class="col-sm-6">
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-5">
+                    <label for="inputStock" class="form-label">Stock</label>
+                    <input formControlName="totalstock" type="number" class="form-control" id="inputStock">
+                  </div>
+  
+                  <div class="p-2 col-md-5">
+                    <label for="inputEstatus" class="form-label">Estatus</label>
+                    <select formControlName="estatus" class="form-select" id="inputEstatus" required>    
+                      <option value="ACTIVO">ACTIVO</option>
+                      <option value="INACTIVO">INACTIVO</option>
+                    </select>
+                  </div>
+  
+                </div>
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-5">
+                    <label for="inputEstatus" class="form-label">Ingresado</label>
+                    <input formControlName="ingresado" type="text" class="form-control" id="inputEstatus">
+                  </div>
+    
+                  <div class="p-2 col-md-5">
+                    <label for="inputCantidad" class="form-label">Cantidad</label>
+                    <input formControlName="cantidad" type="number" class="form-control" id="inputCantidad">
+                  </div>
+  
+                </div>
+  
+                <div class="d-flex">
+  
+                  <div class="p-2 col-md-5">
+                    <label for="inputEstandar" class="form-label">Precio Estandar</label>
+                    <input formControlName="precioestandar" type="number" class="form-control" id="inputEstandar">
+                  </div>
+  
+                  <div class="p-2 col-md-5">
+                    <label for="inputPedido" class="form-label">Precio Pedido</label>
+                    <input formControlName="preciopedido" type="number" class="form-control" id="inputPedido">
+                  </div> 
+  
+                </div>
+  
+              </div>
+            </div>
+              
+        
+            <div class="mb-3">
+              <label for="exampleDescripcion" class="form-label">Descripción</label>
+              <textarea formControlName="descripcion" class="form-control" id="exampleDescripcion" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="exampleObservaciones" class="form-label">Observaciones</label>
+              <textarea formControlName="observacion" class="form-control" id="exampleObservaciones" rows="3"></textarea>
+            </div>
+          </div>
+  
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success"> Guardar </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  </form>
+
+-->
