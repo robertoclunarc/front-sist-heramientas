@@ -1,50 +1,181 @@
-<h5>pedidos works!</h5>
+<div class="card">
+  <div class="card-header d-flex">
 
-<form class="row g-3">
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail4">
-    </div>
-    <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">Password</label>
-      <input type="password" class="form-control" id="inputPassword4">
-    </div>
-    <div class="col-12">
-      <label for="inputAddress" class="form-label">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="col-12">
-      <label for="inputAddress2" class="form-label">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
-    <div class="col-md-6">
-      <label for="inputCity" class="form-label">City</label>
-      <input type="text" class="form-control" id="inputCity">
-    </div>
-    <div class="col-md-4">
-      <label for="inputState" class="form-label">State</label>
-      <select id="inputState" class="form-select">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <label for="inputZip" class="form-label">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
-    </div>
-    <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
+      <div class="p-2 w-100">
+        <h5>PEDIDO</h5> 
       </div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <div class="p-2 flex-shrink-1">
+        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-plus-circle-fill">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+          </svg>
+        </i></button>
       </div>
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Sign in</button>
+
+  </div>
+
+  <div class="card-body">
+
+ <!--   <form class="d-flex mb-3" role="search">
+
+      <input
+      id="nombre"
+       class="form-control me-2"
+       [(ngModel)]="searchTerm" 
+       type="search" placeholder="Buscar Herramienta"
+        aria-label="Search">
+
+      <button class="btn btn-outline-success" (click)="listaEntradas()" type="submit">Search</button>  
+    </form> 
+  -->
+
+    <div class="table-responsive">
+      <table class="table justify-content-center table-light table-hover">
+        <thead>
+          <tr>
+            <th style="text-align: center;" ></th>
+            <th style="text-align: center;" >ID</th>
+            <th style="text-align: center;" >ID Solicitante</th>
+            <th style="text-align: center;" >Fecha</th>
+            <th style="text-align: center;" >Destino</th>
+            <th style="text-align: center;" >Despachado</th>
+            <th style="text-align: center;" >Departamento</th>
+            <th style="text-align: center;" >Observación</th>
+            <th style="text-align: center;" >Precio Pedido</th>
+            <th style="text-align: center;" >Hora</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+
+          <tr *ngFor="let item of _listapedidos">
+            <td><button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="btn btn-success btn-sm"><i class="bi bi-pencil-square">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+              </svg>
+            </i></button></td>
+            <td style="text-align: center; min-width: 100px;">{{ item.idpedido }}</td>
+            <td style="text-align: center; min-width: 100px;">{{ item.idsolicitante }}</td>
+            <td style="text-align: center; min-width: 100px;">{{ item.fecha | date: "dd/MM/yyyy" }}</td>
+            <td style="text-align: center; min-width: 150px;">{{ item.destino }}</td>
+            <td style="text-align: center; min-width: 150px;">{{ item.despachado }}</td>
+            <td style="text-align: center; min-width: 200px;">{{ item.departamento }}</td>
+            <td style="text-align: center; min-width: 100px;">{{ item.observacion }}</td>
+            <td style="text-align: center; min-width: 100px;">{{ item.preciopedido }}</td>
+            <td style="text-align: center; min-width: 100px;">{{ item.hora }}</td>
+          </tr>
+
+        </tbody>
+      </table>
     </div>
-  </form>
+  </div>
+  <footer>
+  </footer>
+
+</div>
+
+
+<form [formGroup]="formPedido" class="row g-3">
+
+  <!-- Modal -->
+  
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">  
+          
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"> PEDIDO </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        </div>
+
+        <div class="modal-body">
+
+          <div class="row col-sm-max">
+
+            <!-- CAJA DERECHA -->
+            <div class="col-sm-6">
+
+              <div class="d-flex">
+
+                <div class="p-2 col-md-4">
+                  <label for="inputFecha" class="form-label">Fecha</label>
+                  <input formControlName="fecha" type="text" readonly class="form-control" id="inputFecha" >
+                </div>
+                <div class="p-2 col-md-5">
+                  <label for="inputDestino" class="form-label">Destino</label>
+                  <input formControlName="destino" type="text" class="form-control" id="inputDestino">
+                </div>
+
+              </div>
+
+              <div class="d-flex">
+
+                <div class="p-2 col-md-9">
+                  <label for="inputDespachado" class="form-label">Despachado</label>
+                  <input formControlName="despachado" type="text" class="form-control" id="inputDespachado">
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- CAJA IZQUIERDA --> 
+            <div class="col-sm-6">
+
+              <div class="d-flex">
+
+                <div class="p-2 col-md-5">
+                  <label for="inputHora" class="form-label">Hora</label>
+                  <input formControlName="hora" type="text" class="form-control" id="inputHora">
+                </div>
+
+                <div class="p-2 col-md-5">
+                  <label for="inputPrecio" class="form-label">Precio Pedido</label>
+                  <input formControlName="preciopedido" type="number" class="form-control" id="inputPrecio">
+                </div>
+
+              </div>
+
+              <div class="d-flex">
+
+                <div class="p-2 col-md-9">
+                  <label for="inputDepartamento" class="form-label">Departamento</label>
+                  <input formControlName="departamento" type="text" class="form-control" id="inputDepartamento">
+                </div>
+
+              </div>
+
+              <!--<div class="d-flex">
+
+                <div class="p-2 col-md-5">
+                  <label for="inputEstandar" class="form-label">Precio Estandar</label>
+                  <input formControlName="" type="number" class="form-control" id="inputEstandar">
+                </div>
+
+                <div class="p-2 col-md-5">
+                  <label for="inputPedido" class="form-label">Precio Pedido</label>
+                  <input formControlName="" type="number" class="form-control" id="inputPedido">
+                </div> 
+
+              </div> -->
+
+            </div>
+          </div>
+            
+          <div class="mb-3">
+            <label for="exampleObservaciones" class="form-label">Observaciones</label>
+            <textarea formControlName="observacion" class="form-control" id="exampleObservaciones" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success"> Guardar </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+</form>

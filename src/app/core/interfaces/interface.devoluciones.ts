@@ -9,7 +9,7 @@ export interface Devoluciones {
     fecha?: string;
     cantidad?: number;
     observaciones?: number;
-    status?: number;
+    estatus?: number;
     usuarioreg?: string;
     fechareg?: string;
     usuariomod?: string;

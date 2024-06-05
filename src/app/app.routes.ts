@@ -29,19 +29,14 @@ export const routes: Routes = [
                 loadComponent: () => import('./components/principal/home/home.component')
             },
             {
-                path: 'consultas',
-                title: 'Consultas',
-                loadComponent: () => import('./components/principal/consultas/consultas.component'),
-            },
-            {
                 path: 'devoluciones',
                 title: 'Devoluciones',
                 loadComponent: () => import('./components/principal/devoluciones/devoluciones.component'),
             },
             {
-                path: 'prestamos',
-                title: 'Prestamos',
-                loadComponent: () => import('./components/principal/prestamos/prestamos.component')
+                path: 'pedidos',
+                title: 'Pedidos',
+                loadComponent: () => import('./components/principal/pedidos/pedidos.component')
             },
             {
                 path: 'entradas',
@@ -60,7 +55,7 @@ export const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: 'herramientas',
+                redirectTo: 'home',
                 pathMatch: 'full'
             }
 
