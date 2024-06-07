@@ -1,22 +1,23 @@
-<nav class="navbar bg-body-tertiary sticky-top">
+<nav class="navbar bg-body-tertiary sticky-top" style="box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);">
   <div class="container-fluid">
-    <a class="navbar-brand">
-      <img src="../../../assets/img/logo_briqven.png" alt="BRIQVEN" width="120" height="35">
-    </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand">
+        <img src="../../../assets/img/logo_briqven.png" alt="BRIQVEN" width="120" height="35">
+      </a>
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="position: fixed; top: 63px; right: 0; width: 250px; height: 100vh; background-color: #263238;">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"> Menu</h5>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: white;"> Menu</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
           <li class="nav-item" *ngFor="let item of menuItems">
-            <a class="nav-link active" aria-current="page" href="{{item.path}}">{{item.title}}</a>
+            <a class="nav-link" aria-current="page" href="{{item.path}}" style="color: white;">{{item.title}}</a>
           </li>
-              
         </ul>
       </div>
     </div>
